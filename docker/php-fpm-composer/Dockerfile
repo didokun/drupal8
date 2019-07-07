@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y --fix-missing \
     wget \
     linux-libc-dev \
     libyaml-dev \
-    zlib1g-dev \
+    libzip-dev \
     libicu-dev \
     libpq-dev \
     libssl-dev && \
@@ -32,7 +32,8 @@ RUN docker-php-ext-install \
     intl \
     exif \
     ftp \
-    bcmath
+    bcmath \
+    zip
 
 RUN cd /usr/src && \
     curl -sS http://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
@@ -48,5 +49,3 @@ RUN chown -R www-data:www-data $HOME/.composer/
 USER www-data
 WORKDIR /var/www/html
 VOLUME /var/www/html
-
-#CMD ["composer", "install"]

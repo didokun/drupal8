@@ -8,12 +8,15 @@ services:
      - php
      - database
     volumes:
-      - ./site.conf:/etc/nginx/conf.d/default.conf
+      - ./server.conf:/etc/nginx/nginx.conf:ro
+      - ./site.conf:/etc/nginx/conf.d/default.conf:ro
+      - ../src:/var/www/html
 
   php:
     build: ./php-fpm-composer
     container_name: d8_php
-    user: "1000:1000"
+    ports:
+      - "9000:9000"
     volumes:
       - ../src:/var/www/html
 
